@@ -215,3 +215,48 @@ Array.method('unshift', function () {
         [0, 0].concat(Array.prototype.splice.apply(arguments)))
     return this.length
 })
+
+// Function
+// function.apply(thisArg, argArray)
+
+Function.method('bind', function (that) {
+    var method = this,
+        slice = Array.prototype.slice,
+        args = slice.apply(arguments, [1])
+    return function () {
+        return method.apply(that, args.concat(slice.apply(arguments, [0])))
+    }
+})
+
+var x = function () {
+    return this.value
+}.bind({value: 666})
+console.log(x())
+
+// Number
+// number.toExponential(fractionDigits)
+
+console.log(Math.PI.toExponential(0))
+console.log(Math.PI.toExponential(2))
+console.log(Math.PI.toExponential(7))
+console.log(Math.PI.toExponential(16))
+console.log(Math.PI.toExponential())
+
+// number.toFixed(fractionDigits)
+console.log(Math.PI.toFixed(0))
+console.log(Math.PI.toFixed(2))
+console.log(Math.PI.toFixed(7))
+console.log(Math.PI.toFixed(16))
+console.log(Math.PI.toFixed())
+
+// number.toPrecision(precision)
+console.log(Math.PI.toPrecision(2))
+console.log(Math.PI.toPrecision(7))
+console.log(Math.PI.toPrecision(16))
+console.log(Math.PI.toPrecision())
+
+// number.toString(radix)
+console.log(Math.PI.toString(2))
+console.log(Math.PI.toString(8))
+console.log(Math.PI.toString(16))
+console.log(Math.PI.toString())
